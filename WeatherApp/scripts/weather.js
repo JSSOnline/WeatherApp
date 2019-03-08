@@ -4,22 +4,35 @@ let data = {};
 
 function getUserInput(){
     let festivalLocationInput = document.getElementById('inputText').value;
-    
-    console.log('festivalLocation', festivalLocationInput)
     return festivalLocationInput;
 }
 
 function getWeather(e, festivalLocationInput){
     let festivalLocation = getUserInput(festivalLocationInput);
-    let getLocalWeather = getWeatherAPIUrl + festivalLocation + APIKey;
-    if(festivalLocationInput !== ''){
-        fetch(getLocalWeather)
+    let getFestivalWeather = getWeatherAPIUrl + festivalLocation + APIKey;
+
+    if(festivalLocationInput !== null){
+        fetch(getFestivalWeather)
         .then(response => response.json())
-        .then(data => {
-            console.log(data.list[0].main.temp);
+        .then(getData => {
+            data = getData;
+            console.log(data);
+            convertKelvinToCelcius();
+            setWeather();
         })
         .catch(err => console.log('Error', err));
     }else{
         return console.log('No User Input');
     }
+};
+
+function setWeather(tempCelsius){
+    let tempC = convertKelvinToCelcius(tempCelsius);
+    document.getElementById('city').innerHTML = data.city.name;
+    document.getElementById('temp').innerHTML = tempC.toFixed(2) + '&deg;C';
+};
+
+function convertKelvinToCelcius(){
+    let tempCelsius = data.list[0].main.temp - 273.15;
+    return tempCelsius;
 };
