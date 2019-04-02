@@ -3,21 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>WeatherApp</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="scripts/weather.js"></script>
+    <script src="scripts/main.js"></script>
 </head>
-<body>
+<body onload="getWeather()">
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">three</a></li>
+        </ul>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">WeatherApp</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Sass</a></li>
+                    <li><a href="#">Components</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown
+                        <i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
     <div class="container">
-        <h1>WeatherApp</h1>
-        <h2>Plaats: <span id="city">{Plaats}</span></h2>
-        <h3>Temperatuur: <span id="temp">{Temperatuur}</span></h3>
-        <input type="text" id="inputText">
-        <input type="submit" onclick="getWeather()">
+        <div class="row">
+            <h2>Plaats: <span id="city">Weert</span></h2>
+            <h3>Temperatuur: <span id="temp">{Temperatuur}</span></h3>
+            <h4><span id="weertype"></span></h4>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Temperatuur</th>
+                    <th>Weertype</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: weather">
+                <tr>
+                    <td data-bind="text: date"></td>
+                    <td data-bind="text: temperature"></td>
+                    <td class="weather-icon" data-bind="html: icon"></td>
+                    <td data-bind="text: type"></td>
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="scripts/materialize.js"></script>
+    <script src="scripts/weather.js"></script>
 </body>
 </html>

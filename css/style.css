@@ -1,3 +1,13 @@
 body{
     font-family: 'Roboto', sans-serif;
 }
+
+.weather-icon{
+    padding: 0 0;
+    width: 55px;
+   
+}
+
+td img{
+    vertical-align: middle;
+}
